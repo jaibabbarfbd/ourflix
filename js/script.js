@@ -1,4 +1,4 @@
-﻿/* =========================================================================
+/* =========================================================================
    ADD YOUR OWN PHOTOS & VIDEOS HERE
    ------------------------------------------------------------------------
    1. Drop your photo/video files into the "media" folder next to this file
@@ -241,7 +241,7 @@ function cardHTML(item) {
   
   const isFav = myFavorites.includes(item.id);
   const heartClass = isFav ? 'active' : '';
-  const favBtn = `<div class="card-favorite-btn ${heartClass}" onclick="toggleFavorite(event, ${item.id})">â™¥</div>`;
+  const favBtn = `<div class="card-favorite-btn ${heartClass}" onclick="toggleFavorite(event, ${item.id})">♥</div>`;
 
   return `
     <div class="card" data-id="${item.id}"
