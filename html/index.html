@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OURFLIX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .episode-panel {
+      margin: 24px 0 0;
+      background: #181818;
+      border-radius: 8px;
+      padding: 32px 32px 16px;
+    }
+
+    .episode-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .episode-panel-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .custom-alert {
+      position: fixed;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(229, 9, 20, 0.95);
+      color: #fff;
+      padding: 16px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    .custom-alert.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(10px);
+    }
+
+    .season-select {
+      background: #242424;
+      color: #fff;
+      border: 1px solid #4a4a4a;
+      padding: 8px 32px 8px 12px;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 12px auto;
+    }
+
+    .episode-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .episode-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      border-bottom: 1px solid #404040;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background .15s ease;
+    }
+
+    .episode-row:hover {
+      background: #333;
+    }
+
+    .episode-row:last-child {
+      border-bottom: none;
+    }
+
+    .episode-row.disabled {
+      cursor: default;
+      opacity: .55;
+    }
+
+    .episode-row.disabled:hover {
+      background: transparent;
+    }
+
+    .episode-number {
+      font-size: 24px;
+      color: #d2d2d2;
+      font-weight: 400;
+      width: 32px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .episode-thumb {
+      position: relative;
+      flex: 0 0 130px;
+      height: 73px;
+      border-radius: 4px;
+      background-size: cover;
+      background-position: center;
+      background-color: #2b2b2b;
+      overflow: hidden;
+    }
+
+    .episode-thumb .ep-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, .3);
+      opacity: 0;
+      transition: opacity .15s ease, background .15s ease;
+    }
+
+    .ep-play-icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+      padding-left: 2px;
+      background: rgba(0,0,0,0.5);
+    }
+
+    .episode-row:hover .episode-thumb .ep-play {
+      opacity: 1;
+    }
+
+    .episode-row.disabled .ep-play {
+      display: none;
+    }
+
+    .episode-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .episode-title-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .episode-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .episode-duration {
+      font-size: 14px;
+      color: #a3a3a3;
+    }
+
+    .episode-desc {
+      font-size: 14px;
+      line-height: 1.4;
+      color: #a3a3a3;
+      margin-top: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .intro-overlay {
+      position: absolute;
+      inset: 0;
+      background: #000;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+
+    .intro-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      color: #e50914;
+      font-size: 64px;
+      letter-spacing: 3px;
+      text-align: center;
+      line-height: 1.1;
+      transform: scale(0.8);
+      opacity: 0;
+      animation: introAnim 4s ease forwards;
+    }
+
+    @keyframes introAnim {
+      0% { transform: scale(0.8); opacity: 0; text-shadow: 0 0 0 transparent; }
+      15% { transform: scale(1); opacity: 1; text-shadow: 0 0 20px rgba(229, 9, 20, 0.8); }
+      80% { transform: scale(1.1); opacity: 1; text-shadow: 0 0 30px rgba(229, 9, 20, 0.4); }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      background: #000;
+    }
+
+    .next-ep-btn {
+      position: absolute;
+      bottom: 80px;
+      right: 32px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 10px 24px;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, background 0.2s ease, transform 0.2s ease;
+      z-index: 10;
+    }
+
+    .next-ep-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .next-ep-btn:hover {
+      background: #fff;
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    .nav-notification {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding: 10px 0;
+    }
+
+    .notif-badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: var(--red);
+      color: #fff;
+      font-size: 10px;
+      font-weight: bold;
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .notif-dropdown {
+      position: absolute;
+      top: 100%;
+      right: -10px;
+      width: 340px;
+      background: rgba(0, 0, 0, 0.95);
+      border: 1px solid #333;
+      border-radius: 4px;
+      display: none;
+      flex-direction: column;
+      z-index: 200;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    .nav-notification:hover .notif-dropdown {
+      display: flex;
+    }
+
+    .notif-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      right: 14px;
+      border-width: 0 8px 8px 8px;
+      border-style: solid;
+      border-color: transparent transparent #333 transparent;
+    }
+
+    .notif-dropdown::after {
+      content: '';
+      position: absolute;
+      top: -7px;
+      right: 14px;
+      border-width: 0 8px 8px 8px;
+      border-style: solid;
+      border-color: transparent transparent rgba(0, 0, 0, 0.95) transparent;
+    }
+
+    .notif-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      border-bottom: 1px solid #333;
+      transition: background 0.2s;
+    }
+
+    .notif-item:last-child {
+      border-bottom: none;
+    }
+
+    .notif-item:hover {
+      background: #242424;
+    }
+
+    .notif-img {
+      font-size: 22px;
+      width: 48px;
+      height: 48px;
+      background: #1f1f1f;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .notif-text {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .notif-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .notif-time {
+      font-size: 12px;
+      color: #a3a3a3;
+    }
+
+    .episode-soon-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      color: var(--red);
+      border: 1px solid var(--red);
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-bottom: 6px;
+    }
+    .pin-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .pin-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .pin-modal {
+      background: rgba(20, 20, 20, 0.7);
+      padding: 50px 40px;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transform: translateY(30px) scale(0.9);
+      transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+      width: 340px;
+    }
+
+    .pin-overlay.active .pin-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    .pin-modal.shake {
+      animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { filter: drop-shadow(0 0 15px rgba(229, 9, 20, 0.4)); transform: scale(1); }
+      50% { filter: drop-shadow(0 0 25px rgba(229, 9, 20, 0.8)); transform: scale(1.05); }
+    }
+
+    .pin-icon {
+      font-size: 38px;
+      margin-bottom: 16px;
+      animation: pulse-glow 2s infinite ease-in-out;
+      display: inline-block;
+    }
+
+    .pin-title {
+      color: #fff;
+      margin-bottom: 6px;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .pin-subtitle {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 15px;
+      margin-bottom: 30px;
+    }
+
+    .pin-inputs {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .pin-digit {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 32px;
+      width: 56px;
+      height: 64px;
+      text-align: center;
+      border-radius: 12px;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .pin-digit:focus {
+      outline: none;
+      border-color: #e50914;
+      background: rgba(229, 9, 20, 0.1);
+      box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .pin-error {
+      color: #ff4b4b;
+      font-size: 15px;
+      height: 20px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="profileGate" class="profile-gate">
+    <div class="profile-gate-content">
+      <h1 class="profile-gate-title">Who's watching?</h1>
+      <div class="profiles">
+        <div class="profile" onclick="selectProfile('Me')">
+          <div class="profile-img" style="background: linear-gradient(135deg, #e50914, #831010);">Me</div>
+          <span class="profile-name">Me</span>
+        </div>
+        <div class="profile" onclick="selectProfile('You')">
+          <div class="profile-img" style="background: linear-gradient(135deg, #10832d, #083c16);">You</div>
+          <span class="profile-name">You</span>
+        </div>
+        <div class="profile" onclick="selectProfile('US')">
+          <div class="profile-img" style="background: linear-gradient(135deg, #104183, #091a3b);">US</div>
+          <span class="profile-name">US</span>
+        </div>
+      </div>
+      <button class="manage-profiles">Manage Profiles</button>
+    </div>
+  </div>
+
+  <div id="searchSlate" class="search-slate hidden">
+    <div class="search-slate-content">
+      Oops there is nothing to search expect my heart which is lost in your beautiful eyes ❤️
+    </div>
+  </div>
+
+  <nav id="nav">
+    <div class="nav-left">
+      <div class="logo">OURFLIX</div>
+      <div class="nav-links">
+        <a href="#home" class="active">Home</a>
+        <a href="#top10">Top 5</a>
+        <a href="#edits">Cute Edits Season 1</a>
+        <a href="#photos">Photos</a>
+        <a href="#dates">Cute Nothings</a>
+        <a href="#trips">Adventures</a>
+        <a href="#throwbacks">Throwbacks</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <span class="nav-icon" id="searchIcon">🔍</span>
+      <div class="nav-notification">
+        <span class="nav-icon" style="position: relative;">🔔<span class="notif-badge">3</span></span>
+        <div class="notif-dropdown">
+          <div class="notif-item">
+            <div class="notif-img">🎉</div>
+            <div class="notif-text">
+              <span class="notif-title">yuhhuuuu one year completed</span>
+              <span class="notif-time">Just now</span>
+            </div>
+          </div>
+          <div class="notif-item">
+            <div class="notif-img">❤️</div>
+            <div class="notif-text">
+              <span class="notif-title">Happy anniversary</span>
+              <span class="notif-time">2 hours ago</span>
+            </div>
+          </div>
+          <div class="notif-item">
+            <div class="notif-img">🥰</div>
+            <div class="notif-text">
+              <span class="notif-title">I love you</span>
+              <span class="notif-time">1 day ago</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="avatar">US</div>
+    </div>
+  </nav>
+
+  <header class="hero" id="home">
+    <video id="heroBgVideo" class="hero-video-bg" autoplay muted loop playsinline>
+      <source src="/media/HEY_faststart.mp4?v=3" type="video/mp4">
+    </video>
+    <div class="hero-content">
+      <div class="hero-badge">★ OURFLIX ORIGINAL</div>
+      <h1 class="hero-title">Our Story</h1>
+      <div class="hero-meta">
+        <span class="match">98% our match</span>
+        <span>Ongoing</span>
+        <span class="tag">18+ Cute</span>
+        <span>Unlimited seasons</span>
+      </div>
+      <p class="hero-desc">Every video edit, every photo, every little moment of us — all in one place, forever
+        bingeable.</p>
+      <div class="hero-buttons">
+        <button class="btn btn-play" onclick="openModal(101)">▶ Play</button>
+        <button class="btn btn-info" onclick="scrollToRows()">ⓘ More Info</button>
+        <button class="btn btn-info" onclick="playRandom()">🎲 Surprise Me</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="rows" id="mainRows">
+
+    <section class="row" id="mylist" style="display: none;">
+      <h2 class="row-title">My List</h2>
+      <div class="row-track" id="row-mylist"></div>
+    </section>
+
+    <section class="row" id="continue">
+      <h2 class="row-title">Continue Watching For You</h2>
+      <div class="row-track" id="row-continue"></div>
+    </section>
+
+    <section class="row" id="top10">
+      <h2 class="row-title">Top 5 Us Moments</h2>
+      <div class="row-track numbered" id="row-top10"></div>
+    </section>
+
+    <section class="row" id="edits">
+      <h2 class="row-title">Series</h2>
+      <div class="row-track" id="row-edits"></div>
+    </section>
+
+    <section class="row" id="photos">
+      <h2 class="row-title">Photo Album</h2>
+      <div class="row-track" id="row-photos"></div>
+    </section>
+
+    <section class="row" id="dates">
+      <h2 class="row-title">Cute Nothings</h2>
+      <div class="row-track" id="row-dates"></div>
+    </section>
+
+    <section class="row" id="trips">
+      <h2 class="row-title">Adventures & Trips</h2>
+      <div class="row-track" id="row-trips"></div>
+    </section>
+
+    <section class="row" id="throwbacks">
+      <h2 class="row-title">Throwbacks</h2>
+      <div class="row-track" id="row-throwbacks"></div>
+    </section>
+
+    <section class="row" id="newreleases">
+      <h2 class="row-title">New Releases</h2>
+      <div class="row-track" id="row-new"></div>
+    </section>
+
+    <section class="row secret-row" id="secret" style="display: none;">
+      <h2 class="row-title" style="color: var(--red);">The Secret Vault ❤️</h2>
+      <div class="row-track" id="row-secret"></div>
+    </section>
+
+  </main>
+
+  <footer>Made with <span>♥</span> for us — new episodes always coming</footer>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal modal-wrap">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="modalMediaSlot"></div>
+      <div class="modal-body">
+        <h3 class="modal-title" id="modalTitle"></h3>
+        <p class="modal-meta" id="modalMeta"></p>
+        <p class="modal-caption" id="modalCaption"></p>
+        <div id="modalEpisodeList"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="customAlert" class="custom-alert hidden">
+    <p>Oops there is nothing to search expect my heart which is lost in your beautiful eyes ❤️</p>
+  </div>
+
+  <div id="pinOverlay" class="pin-overlay" onclick="if(event.target.id === 'pinOverlay') closePinModal()">
+    <div class="pin-modal">
+      <div class="pin-icon">🔒</div>
+      <h3 class="pin-title">Enter Secret PIN</h3>
+      <p class="pin-subtitle">When was our first kiss?</p>
+      <div class="pin-inputs">
+        <input type="password" class="pin-digit" maxlength="1" autocomplete="off">
+        <input type="password" class="pin-digit" maxlength="1" autocomplete="off">
+        <input type="password" class="pin-digit" maxlength="1" autocomplete="off">
+        <input type="password" class="pin-digit" maxlength="1" autocomplete="off">
+      </div>
+      <div id="pinError" class="pin-error"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var v = document.getElementById("heroBgVideo");
+      if (v) {
+        v.play().catch(function(e) { console.log("Autoplay prevented:", e); });
+      }
+    });
+  </script>
+  <script src="/js/script.js" defer></script>
+</body>
+
+</html>

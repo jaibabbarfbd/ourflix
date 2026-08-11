@@ -1,0 +1,16 @@
+{
+  "name": "ourflix",
+  "version": "1.0.0",
+  "description": "Ourflix project separated into frontend HTML/CSS/JS and backend Node.js configuration.",
+  "main": "node/server.js",
+  "scripts": {
+    "start": "node node/server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "ffmpeg-static": "^5.3.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

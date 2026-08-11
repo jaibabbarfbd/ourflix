@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Node binary (if bundled locally)
+node/
+
+# Media files - large videos/images should not be tracked in git
+# Store media on a CDN or cloud storage instead
+media/
+
+# OS files
+desktop.ini
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.local
