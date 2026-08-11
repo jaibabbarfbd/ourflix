@@ -415,7 +415,7 @@ function openModal(id) {
       videoEl.style.transition = 'opacity 0.4s ease';
       videoEl.style.opacity = '0';
       setTimeout(() => {
-        videoEl.src = '/media/outro.mp4';
+        videoEl.src = 'https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/outro.mp4';
         videoEl.play().catch(e => console.log('Outro block:', e));
         videoEl.addEventListener('loadeddata', () => {
           videoEl.style.opacity = '1';
