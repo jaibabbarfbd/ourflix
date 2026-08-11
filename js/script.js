@@ -7,8 +7,8 @@
    3. category must be one of:
       "continue", "top10", "edits", "photos", "dates", "trips",
       "throwbacks", "new"
-      (this decides which row it shows up in â€” an item can only be in one).
-   4. "progress" (0-100) only matters for items in the "continue" row â€”
+      (this decides which row it shows up in — an item can only be in one).
+   4. "progress" (0-100) only matters for items in the "continue" row —
       it draws the little red progress bar like Netflix does.
    5. Save the file and refresh the page in your browser.
    ========================================================================= */
@@ -19,35 +19,35 @@ const media = [
   { id: 6, title: "One year mix", type: "video", category: "throwbacks", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/one-year-mix.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/one-year-mix.png", date: "One year in", caption: "A little recap of our first year." },
   { id: 7, title: "Beach day bloopers", type: "video", category: "trips_hidden", thumb: "/media/thumbnails/beach-thumb.jpg", date: "July 2024", caption: "All the outtakes from our beach trip." },
   { id: 8, title: "Mountain hike", type: "image", category: "trips_hidden", src: "/media/thumbnails/hike.jpg", thumb: "/media/thumbnails/hike.jpg", date: "August 2024", caption: "You made it to the top before me, as always." },
-  { id: 100, title: "Cute Edits", type: "series", category: "edits", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/Cute-edits.png", date: "Cute Edits Â· Season 1", caption: "All of our cute edits in one bingeable series." },
-  { id: 101, title: "Episode 1", type: "video", category: "edits_episodes", episode: 1, duration: "1:08", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/cute-edits-ep1.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-1-thumb.jpg", date: "Cute Edits Â· Season 1", caption: "Episode 1 of our Cute Edits series." },
-  { id: 102, title: "Episode 2", type: "video", category: "edits_episodes", episode: 2, duration: "1:17", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/cute-edits-ep2.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-2-thumb.jpg", date: "Cute Edits Â· Season 1", caption: "Episode 2 of our Cute Edits series." },
-  { id: 103, title: "Episode 3", type: "video", category: "edits_episodes", episode: 3, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/silly-faces.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-3-thumb.jpg", date: "Cute Edits Â· Season 1", caption: "Silly faces compilation." },
-  { id: 104, title: "Episode 4", type: "video", category: "edits_episodes", episode: 4, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/our-moments.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-4-thumb.jpg", date: "Cute Edits Â· Season 1", caption: "bin tere nhi h guzara mera" },
+  { id: 100, title: "Cute Edits", type: "series", category: "edits", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/Cute-edits.png", date: "Cute Edits · Season 1", caption: "All of our cute edits in one bingeable series." },
+  { id: 101, title: "Episode 1", type: "video", category: "edits_episodes", episode: 1, duration: "1:08", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/cute-edits-ep1.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-1-thumb.jpg", date: "Cute Edits · Season 1", caption: "Episode 1 of our Cute Edits series." },
+  { id: 102, title: "Episode 2", type: "video", category: "edits_episodes", episode: 2, duration: "1:17", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/cute-edits-ep2.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-2-thumb.jpg", date: "Cute Edits · Season 1", caption: "Episode 2 of our Cute Edits series." },
+  { id: 103, title: "Episode 3", type: "video", category: "edits_episodes", episode: 3, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/silly-faces.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-3-thumb.jpg", date: "Cute Edits · Season 1", caption: "Silly faces compilation." },
+  { id: 104, title: "Episode 4", type: "video", category: "edits_episodes", episode: 4, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/our-moments.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-4-thumb.jpg", date: "Cute Edits · Season 1", caption: "bin tere nhi h guzara mera" },
   { id: 14, title: "City lights walk", type: "image", category: "trips_hidden", src: "/media/thumbnails/city-lights.jpg", thumb: "/media/thumbnails/city-lights.jpg", date: "May 2025", caption: "Getting lost on purpose." },
   { id: 15, title: "Birthday surprise", type: "video", category: "new", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/birthday_kesariya_edit.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/Birthday-suprise.png", date: "Last month", caption: "The reaction was worth every second of planning." },
   { id: 17, title: "Anniversary recap", type: "video", category: "new", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/anniversary-recap.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/Anniversary-recap-thumbnail.png", date: "Last week", caption: "Every moment of the best year yet." },
   { id: 170, title: "Anniversary recap", type: "video", category: "top10", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/anniversary-recap.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/Anniversary-recap-thumbnail-2.png", date: "Last week", caption: "Every moment of the best year yet." },
-  { id: 28, title: "us kissing ðŸ’‹", type: "video", category: "top10", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/kiss-merged.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/Us-kissing.png", date: "Recently", caption: "1 minute kiss compilation" },
+  { id: 28, title: "us kissing 💋", type: "video", category: "top10", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/kiss-merged.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/Us-kissing.png", date: "Recently", caption: "1 minute kiss compilation" },
   { id: 118, title: "BLOOPERS", type: "video", category: "top10", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/bloopers.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/Bloopers-thumbnail.png", date: "Recently", caption: "Bloopers" },
   { id: 117, title: "our fit check", type: "video", category: "top10", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/fit_check.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/fit_check_thumb.png", date: "Recently", caption: "Our fit check video." },
   { id: 119, title: "One Year Mix", type: "video", category: "top10", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/one-year-mix.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/One-year-mix-2.png", date: "1 Year Anniversary", caption: "A beautiful mix of our first year together." },
-  { id: 105, title: "Valentine Week", type: "series", category: "edits", seriesKey: "valentine", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/Valentine.png", date: "Valentine Week Â· Season 1", caption: "Our special Valentine Week." },
-  { id: 29, title: "Rose Day", type: "video", category: "valentine_episodes", episode: 1, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/roseday_trimmed_155.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-1-thumb.jpg", date: "Valentine Week Â· Season 1", caption: "Rose day special" },
-  { id: 26, title: "Valentine Proposal", type: "video", category: "valentine_episodes", episode: 2, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/valentine-proposal.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-2-thumb.jpg", date: "Valentine Week Â· Season 1", caption: "The moment I asked you to be mine." },
-  { id: 30, title: "Teddy Day", type: "video", category: "valentine_episodes", episode: 3, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/teddy-day.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-3-thumb.jpg", date: "Valentine Week Â· Season 1", caption: "Teddy day" },
-  { id: 33, title: "Promise Day", type: "video", category: "valentine_episodes", episode: 4, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/promise-day.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-4-thumb.jpg", date: "Valentine Week Â· Season 1", caption: "Promise day" },
-  { id: 32, title: "Hug Day", type: "video", category: "valentine_episodes", episode: 5, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/hug-day.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-5-thumb.png", date: "Valentine Week Â· Season 1", caption: "Hug day" },
-  { id: 27, title: "kiss day valentine week", type: "video", category: "valentine_episodes", episode: 6, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/kiss-day.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-6-thumb.png", date: "Valentine Week Â· Season 1", caption: "Kiss day" },
-  { id: 31, title: "Valentine's Day Gift", type: "video", category: "valentine_episodes", episode: 7, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/valentine-gift.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-7-thumb.png", date: "Valentine Week Â· Season 1", caption: "Valentine's Day Gift" },
+  { id: 105, title: "Valentine Week", type: "series", category: "edits", seriesKey: "valentine", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/Valentine.png", date: "Valentine Week · Season 1", caption: "Our special Valentine Week." },
+  { id: 29, title: "Rose Day", type: "video", category: "valentine_episodes", episode: 1, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/roseday_trimmed_155.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-1-thumb.jpg", date: "Valentine Week · Season 1", caption: "Rose day special" },
+  { id: 26, title: "Valentine Proposal", type: "video", category: "valentine_episodes", episode: 2, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/valentine-proposal.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-2-thumb.jpg", date: "Valentine Week · Season 1", caption: "The moment I asked you to be mine." },
+  { id: 30, title: "Teddy Day", type: "video", category: "valentine_episodes", episode: 3, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/teddy-day.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-3-thumb.jpg", date: "Valentine Week · Season 1", caption: "Teddy day" },
+  { id: 33, title: "Promise Day", type: "video", category: "valentine_episodes", episode: 4, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/promise-day.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-4-thumb.jpg", date: "Valentine Week · Season 1", caption: "Promise day" },
+  { id: 32, title: "Hug Day", type: "video", category: "valentine_episodes", episode: 5, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/hug-day.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-5-thumb.png", date: "Valentine Week · Season 1", caption: "Hug day" },
+  { id: 27, title: "kiss day valentine week", type: "video", category: "valentine_episodes", episode: 6, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/kiss-day.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-6-thumb.png", date: "Valentine Week · Season 1", caption: "Kiss day" },
+  { id: 31, title: "Valentine's Day Gift", type: "video", category: "valentine_episodes", episode: 7, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/valentine-gift.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-7-thumb.png", date: "Valentine Week · Season 1", caption: "Valentine's Day Gift" },
 
-  { id: 108, title: "my cute shinchan", type: "series", category: "edits", seriesKey: "shinchan", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/My-cute-Shinchan.png", date: "My Cute Shinchan Â· Season 1", caption: "My cute shinchan series." },
-  { id: 109, title: "Episode 1", type: "video", category: "shinchan_episodes", episode: 1, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/shinchan-1.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-1-thumb.jpg", date: "My Cute Shinchan Â· Season 1", caption: "shinchan 1" },
-  { id: 111, title: "Episode 2", type: "video", category: "shinchan_episodes", episode: 2, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/shinchan-ep2.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-2-thumb.jpg", date: "My Cute Shinchan Â· Season 1", caption: "shinchan 2" },
-  { id: 112, title: "Episode 3", type: "video", category: "shinchan_episodes", episode: 3, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/shinchan-ep3.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-3-thumb.jpg", date: "My Cute Shinchan Â· Season 1", caption: "shinchan 3" },
-  { id: 113, title: "Episode 4", type: "video", category: "shinchan_episodes", episode: 4, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/shinchan-ep4.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-4-thumb.jpg", date: "My Cute Shinchan Â· Season 1", caption: "shinchan 4" },
+  { id: 108, title: "my cute shinchan", type: "series", category: "edits", seriesKey: "shinchan", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/My-cute-Shinchan.png", date: "My Cute Shinchan · Season 1", caption: "My cute shinchan series." },
+  { id: 109, title: "Episode 1", type: "video", category: "shinchan_episodes", episode: 1, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/shinchan-1.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-1-thumb.jpg", date: "My Cute Shinchan · Season 1", caption: "shinchan 1" },
+  { id: 111, title: "Episode 2", type: "video", category: "shinchan_episodes", episode: 2, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/shinchan-ep2.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-2-thumb.jpg", date: "My Cute Shinchan · Season 1", caption: "shinchan 2" },
+  { id: 112, title: "Episode 3", type: "video", category: "shinchan_episodes", episode: 3, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/shinchan-ep3.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-3-thumb.jpg", date: "My Cute Shinchan · Season 1", caption: "shinchan 3" },
+  { id: 113, title: "Episode 4", type: "video", category: "shinchan_episodes", episode: 4, src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/shinchan-ep4.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/ep-episode-4-thumb.jpg", date: "My Cute Shinchan · Season 1", caption: "shinchan 4" },
   { id: 110, title: "oracle", type: "video", category: "dates", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/oracle.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/Oracle-thumbnail.png", date: "Recently", caption: "oracle says we are a perfect match" },
-  { id: 114, title: "mein Kush ho jati ðŸ˜", type: "video", category: "dates", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/mein-khush.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/Our-drama-part-1.png", date: "Recently", caption: "Our Drama" },
+  { id: 114, title: "mein Kush ho jati 😁", type: "video", category: "dates", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/mein-khush.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/Our-drama-part-1.png", date: "Recently", caption: "Our Drama" },
   { id: 126, title: "jalwa", type: "video", category: "dates", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/jalwa.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/Our-drama-part-2.png", date: "Recently", caption: "jalwa" },
   { id: 997, title: "Secret Vault", type: "video", category: "secret", src: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-media/secret-vault.mp4", thumb: "https://github.com/jaibabbarfbd/ourflix/releases/download/v1.0-thumbs/secret-message-thumb.png", date: "Shhh...", caption: "Another secret memory." },
 
@@ -192,7 +192,7 @@ function episodeRowHTML(item) {
         <div class="episode-info">
           <div class="episode-title-line">
             <span class="episode-title">${item.title}</span>
-            <span class="episode-duration">â€”</span>
+            <span class="episode-duration">—</span>
           </div>
           <span class="episode-soon-tag">COMING SOON</span>
           <p class="episode-desc">${item.caption}</p>
@@ -203,7 +203,7 @@ function episodeRowHTML(item) {
     <div class="episode-row" data-id="${item.id}">
       <span class="episode-number">${item.episode}</span>
       <div class="episode-thumb" style="background-image:url('${item.thumb}');">
-        <span class="ep-play"><div class="ep-play-icon">â–¶</div></span>
+        <span class="ep-play"><div class="ep-play-icon">▶</div></span>
       </div>
       <div class="episode-info">
         <div class="episode-title-line">
@@ -226,7 +226,7 @@ function cardHTML(item) {
         <div class="teaser-content">
           <div class="teaser-badge">COMING SOON</div>
           <div class="teaser-title">${item.title}</div>
-          <div class="teaser-subtitle">Filming soon ðŸŽ¬</div>
+          <div class="teaser-subtitle">Filming soon 🎬</div>
         </div>
       </div>`;
   }
@@ -273,7 +273,7 @@ function renderRow(containerId, category) {
           <div class="teaser-content">
             <div class="teaser-badge">COMING SOON</div>
             <div class="teaser-title">Season 1 Coming Soon</div>
-            <div class="teaser-subtitle">Filming soon ðŸŽ¬</div>
+            <div class="teaser-subtitle">Filming soon 🎬</div>
           </div>
         </div>`;
     } else {
@@ -382,7 +382,7 @@ function openModal(id) {
         <div class="envelope" id="loveEnvelope">
           <div class="flap"></div>
           <div class="letter-paper">
-            <div class="letter-text">the moments that we just had will always be so special for me babe and soo much close to my heart â¤ï¸</div>
+            <div class="letter-text">the moments that we just had will always be so special for me babe and soo much close to my heart ❤️</div>
           </div>
         </div>
       </div>
@@ -403,7 +403,7 @@ function openModal(id) {
           <div class="intro-logo">HAPPY ANNIVERSARY BABE</div>
         </div>
         <video class="modal-media" src="${activeMedia.src}" controls></video>
-        <button id="nextEpBtn" class="next-ep-btn">Next Episode â–¶</button>
+        <button id="nextEpBtn" class="next-ep-btn">Next Episode ▶</button>
       </div>
     `;
 
@@ -500,14 +500,14 @@ function openModal(id) {
     if (currentIndex > 0) {
        const prevBtn = document.createElement('button');
        prevBtn.className = 'gallery-nav prev-btn';
-       prevBtn.innerHTML = 'â—€';
+       prevBtn.innerHTML = '◀';
        prevBtn.onclick = () => openModal(allPhotos[currentIndex - 1].id);
        slot.appendChild(prevBtn);
     }
     if (currentIndex < allPhotos.length - 1) {
        const nextBtn = document.createElement('button');
        nextBtn.className = 'gallery-nav next-btn';
-       nextBtn.innerHTML = 'â–¶';
+       nextBtn.innerHTML = '▶';
        nextBtn.onclick = () => openModal(allPhotos[currentIndex + 1].id);
        slot.appendChild(nextBtn);
     }
@@ -651,7 +651,7 @@ function triggerHearts() {
     } else {
       // Soft heart
       p.classList.add('soft-heart');
-      p.textContent = 'â¤';
+      p.textContent = '❤';
       p.style.fontSize = (Math.random() * 40 + 20) + 'px';
       p.style.color = Math.random() > 0.5 ? 'rgba(255, 182, 193, 0.9)' : 'rgba(255, 105, 180, 0.7)';
       p.style.filter = `blur(${Math.random() * 2}px)`;
@@ -706,7 +706,7 @@ function verifyPin() {
     // Show success message
     const alertEl = document.getElementById('customAlert');
     if (alertEl) {
-      alertEl.innerHTML = '<p>Hello babe ðŸ˜˜</p>';
+      alertEl.innerHTML = '<p>Hello babe 😘</p>';
       alertEl.classList.remove('hidden');
       alertEl.classList.add('show');
       setTimeout(() => {
@@ -722,7 +722,7 @@ function verifyPin() {
     triggerHearts();
   } else {
     const errorEl = document.getElementById('pinError');
-    if (errorEl) errorEl.textContent = 'you are not my babe ðŸ˜¡';
+    if (errorEl) errorEl.textContent = 'you are not my babe 😡';
     inputs.forEach(input => input.value = '');
     if (inputs.length > 0) inputs[0].focus();
     
